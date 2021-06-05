@@ -1,0 +1,4 @@
+C:\Users\timos\Desktop\ООПИнфа\FishProject\Debug\FishProject.vcxprojAssemblyReference.cache
+C:\Users\timos\Desktop\ООПИнфа\FishProject\Debug\FishProject.MyForm.resources
+C:\Users\timos\Desktop\ООПИнфа\FishProject\Debug\FishProject.vcxproj.GenerateResource.cache
+C:\Users\timos\Desktop\ООПИнфа\FishProject\Debug\FishProject.exe

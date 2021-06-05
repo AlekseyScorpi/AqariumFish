@@ -15,7 +15,6 @@ using namespace System::Drawing;
 //Вся реализация конструкторов, методов и т.п. будет находится в:
 //Fish.cpp
 
-public delegate Point FoodDetectedHandler(Food^ food);
 public delegate void CreateCaviarHandler(double x, double y, int color, bool hunt);
 public delegate void DeleteFishHandler(Object^ sender);
 public delegate void FoodEatingHandler(Object^ sender);
@@ -125,7 +124,6 @@ public:
 		}
 	}
 	double getHeight();
-	event FoodDetectedHandler^ foodDetected;
 	event CreateCaviarHandler^ createCaviar;
 	event DeleteFishHandler^ death;
 	event FoodEatingHandler^ foodEating;
