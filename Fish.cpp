@@ -127,9 +127,6 @@ void Fish::move(float x, float y) //задание новых координат и отображение спрайт
 void Fish::moveAnim() //само передвижение - анимация
 {
 	existsFish(this, xCoord, yCoord, level);
-	if ((x == newX) && (y == newY)) {
-		return;
-	}
 	double distance = calculateDistance(xCoord, yCoord, newXCoord, newYCoord);
 	if (distance < 2) {
 		doSeeFood = false;
@@ -143,6 +140,7 @@ void Fish::moveAnim() //само передвижение - анимация
 	}
 	x += speed * (newX - x) / distance;
 	y += speed * (newY - y) / distance;
+	currentDistanceToAnyFood = 10000;
 }
 
 void Fish::foodDetectedMethod(Object^ sender, double x, double y)

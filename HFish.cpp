@@ -58,9 +58,6 @@ void HFish::createCaviarMethod()
 
 void HFish::moveAnim()
 {
-	if ((x == newX) && (y == newY)) {
-		return;
-	}
 	double distance = calculateDistance(xCoord, yCoord, newXCoord, newYCoord);
 	if (distance < 2) {
 		doSeeFood = false;
@@ -74,5 +71,6 @@ void HFish::moveAnim()
 	}
 	x += speed * (newX - x) / distance;
 	y += speed * (newY - y) / distance;
+	currentDistanceToAnyFood = 10000;
 }
 
