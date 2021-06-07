@@ -4,6 +4,12 @@
 #include "Fish.h"
 #include "Caviar.h"
 
+
+//Примечание
+//Вся реализация конструкторов, методов и т.п. будет находится в:
+//HFish.cpp
+
+
 public delegate void fishEatingHandler(Object^ sender);
 
 ref class HFish :

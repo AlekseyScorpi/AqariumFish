@@ -34,6 +34,7 @@ namespace FishProject {
 		cliext::vector<HFish^>^ hfishs = gcnew cliext::vector<HFish^>();
 		cliext::vector<Caviar^>^ caviars = gcnew cliext::vector<Caviar^>();
 		Aquarium^ aquarium = gcnew Aquarium();
+		double chanceCrush = 0;
 	private: System::Windows::Forms::Timer^ timerUpdate;
 	private: System::Windows::Forms::Timer^ moveFIshTimer;
 	private: int fishGenerationCount = 0;
@@ -46,6 +47,8 @@ namespace FishProject {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::TextBox^ hfishCountBox;
 	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::DomainUpDown^ domainUpDown1;
 	private: System::Windows::Forms::Button^ remontButton;
 	public:
 		MyForm(void)
@@ -92,6 +95,10 @@ namespace FishProject {
 			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->groupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->domainUpDown1 = (gcnew System::Windows::Forms::DomainUpDown());
+			this->hfishCountBox = (gcnew System::Windows::Forms::TextBox());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->trashLvlTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->clearButton = (gcnew System::Windows::Forms::Button());
@@ -106,14 +113,14 @@ namespace FishProject {
 			this->timerUpdate = (gcnew System::Windows::Forms::Timer(this->components));
 			this->moveFIshTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->foodColdown = (gcnew System::Windows::Forms::Timer(this->components));
-			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->hfishCountBox = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->drawingBox))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// groupBox
 			// 
+			this->groupBox->Controls->Add(this->label4);
+			this->groupBox->Controls->Add(this->domainUpDown1);
 			this->groupBox->Controls->Add(this->hfishCountBox);
 			this->groupBox->Controls->Add(this->label3);
 			this->groupBox->Controls->Add(this->trashLvlTextBox);
@@ -131,6 +138,55 @@ namespace FishProject {
 			this->groupBox->TabIndex = 0;
 			this->groupBox->TabStop = false;
 			this->groupBox->Text = L"Панель управления";
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(881, 33);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(247, 17);
+			this->label4->TabIndex = 13;
+			this->label4->Text = L"Вероятность поломки компрессора:";
+			// 
+			// domainUpDown1
+			// 
+			this->domainUpDown1->BackColor = System::Drawing::SystemColors::Window;
+			this->domainUpDown1->Items->Add(L"0");
+			this->domainUpDown1->Items->Add(L"0,1");
+			this->domainUpDown1->Items->Add(L"0,2");
+			this->domainUpDown1->Items->Add(L"0,3");
+			this->domainUpDown1->Items->Add(L"0,4");
+			this->domainUpDown1->Items->Add(L"0,5");
+			this->domainUpDown1->Items->Add(L"0,6");
+			this->domainUpDown1->Items->Add(L"0,7");
+			this->domainUpDown1->Items->Add(L"0,8");
+			this->domainUpDown1->Items->Add(L"0,9");
+			this->domainUpDown1->Items->Add(L"1");
+			this->domainUpDown1->Location = System::Drawing::Point(1217, 31);
+			this->domainUpDown1->Name = L"domainUpDown1";
+			this->domainUpDown1->ReadOnly = true;
+			this->domainUpDown1->Size = System::Drawing::Size(120, 22);
+			this->domainUpDown1->TabIndex = 12;
+			this->domainUpDown1->Text = L"0";
+			this->domainUpDown1->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
+			this->domainUpDown1->TextChanged += gcnew System::EventHandler(this, &MyForm::domainUpDown1_TextChanged);
+			// 
+			// hfishCountBox
+			// 
+			this->hfishCountBox->Location = System::Drawing::Point(272, 89);
+			this->hfishCountBox->Name = L"hfishCountBox";
+			this->hfishCountBox->Size = System::Drawing::Size(287, 22);
+			this->hfishCountBox->TabIndex = 10;
+			this->hfishCountBox->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(38, 89);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(108, 17);
+			this->label3->TabIndex = 9;
+			this->label3->Text = L"Из них хищных:";
 			// 
 			// trashLvlTextBox
 			// 
@@ -242,23 +298,6 @@ namespace FishProject {
 			this->foodColdown->Interval = 1000;
 			this->foodColdown->Tick += gcnew System::EventHandler(this, &MyForm::foodColdown_Tick);
 			// 
-			// label3
-			// 
-			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(38, 89);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(108, 17);
-			this->label3->TabIndex = 9;
-			this->label3->Text = L"Из них хищных:";
-			// 
-			// hfishCountBox
-			// 
-			this->hfishCountBox->Location = System::Drawing::Point(272, 89);
-			this->hfishCountBox->Name = L"hfishCountBox";
-			this->hfishCountBox->Size = System::Drawing::Size(287, 22);
-			this->hfishCountBox->TabIndex = 10;
-			this->hfishCountBox->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
-			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -283,12 +322,6 @@ namespace FishProject {
 	private: System::Void closeButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
-
-
-		   // ...
-		   // ...
-		   // ...
-
 
 	private: System::Void generationButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		try {
@@ -328,7 +361,6 @@ namespace FishProject {
 			aquarium = gcnew Aquarium();
 			aquarium->ventIsCrush += gcnew AquariumVentHandler(this, &FishProject::MyForm::ventIsCrush);
 			aquarium->remontSuccess += gcnew AquariumVentHandler(this, &FishProject::MyForm::remontSuccess);
-			drawingBox->Controls->Clear();
 			timerUpdate->Start();
 			moveFIshTimer->Start();
 			foodColdown->Start();
@@ -361,9 +393,6 @@ namespace FishProject {
 					fishs[j]->existsFish += gcnew ExistsFishHandler(hfishs[i], &HFish::fishDetectedMethod);
 				}
 			}
-			/// ...
-			/// /// ... Тут будет ещё много кода ;( (а может и не очень)
-			/// /// ...
 		}
 		catch (...) { // Ловим некорректный ввод (очевидно что Exception будет кидать конвертер,
 			          // поэтому ловим любое исключение через ...
@@ -391,8 +420,10 @@ private: System::Void onPaint(System::Object^ sender, System::Windows::Forms::Pa
 private: void update() { //основной цикл отвещающий за анимацию и основное изменение свойств -> генерация событий
 	Random^ rand = gcnew Random();
 	if (aquarium->ventIsWork == 1) {
-		if (rand->Next(1, 10000) == 5000) { //случайная вероятность поломки компрессора в аквариуме
-			aquarium->ventIsWork = 0;
+		if (chanceCrush != 0) {
+			if (rand->Next(1, (int)(300 / chanceCrush)) == ((int)((300 / chanceCrush) / 2))) { //случайная вероятность поломки компрессора в аквариуме
+				aquarium->ventIsWork = 0;
+			}
 		}
 	}
 	else {
@@ -407,11 +438,16 @@ private: void update() { //основной цикл отвещающий за анимацию и основное измен
 			continue;
 		}
 		fishs[i]->moveAnim();
-		if (aquarium->ventIsWork) { //разный перерасчёт энергии в зависимости от состояния компрессора
-			fishs[i]->energy -= (0.3 + (aquarium->currentTrash / 50));
+		try {
+			if (aquarium->ventIsWork) { //разный перерасчёт энергии в зависимости от состояния компрессора
+				fishs[i]->energy -= (0.3 + (aquarium->currentTrash / 50));
+			}
+			else {
+				fishs[i]->energy -= (0.3 + (10 * aquarium->ventIsWork) + (aquarium->currentTrash / 50));
+			}
 		}
-		else {
-			fishs[i]->energy -= (0.3 + (10 * aquarium->ventIsWork) + (aquarium->currentTrash / 50));
+		catch (...) {
+			i--;
 		}
 	}
 	for (int i = 0; i < hfishs->size(); i++) { //для хищных рыб
@@ -480,9 +516,6 @@ private: System::Void foodButton_Click(System::Object^ sender, System::EventArgs
 private: System::Void foodColdown_Tick(System::Object^ sender, System::EventArgs^ e) {
 	foodColdownFlag = false;
 }
-private: double calculateDistance(double x1, double y1, double x2, double y2) {
-	return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-}
 private: void ventIsCrush() {
 	MessageBox::Show("Компрессор сломался, срочно начните ремонт!", "Внимание", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 }
@@ -549,7 +582,6 @@ private: System::Void clearButton_Click(System::Object^ sender, System::EventArg
 	   }
 	   void OncreateCaviar(double x, double y, int color, bool hunt) { // создание икры и подписки на события
 		   Caviar^ caviar = gcnew Caviar(x, y, color, hunt);
-		   caviar->deleteCaviar += gcnew CaviarDeleteHandler(this, &FishProject::MyForm::OndeleteCaviar);
 		   caviar->fishBirth += gcnew FishBirthHandler(this, &FishProject::MyForm::OnfishBirth);
 		   caviars->push_back(caviar);
 	   }
@@ -583,6 +615,9 @@ private: System::Void clearButton_Click(System::Object^ sender, System::EventArg
 		   }
 		   OndeleteCaviar(sender);
 	   }
+private: System::Void domainUpDown1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	chanceCrush = Convert::ToDouble(domainUpDown1->Text);
+}
 };
 }
 

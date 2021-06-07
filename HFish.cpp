@@ -27,7 +27,7 @@ void HFish::fishDetectedMethod(Object^ sender, double x, double y, int level)
 	}
 	if ((calculateDistance(xCoord, yCoord, x, y) <= visibleDistance)) {
 		if ((calculateDistance(xCoord, yCoord, x, y) <= currentDistanceToAnyFood) 
-			&& (level < this->size) && (this->energy <= 0.3 * getMaxEnergy())) {
+			&& (level < this->size) && (this->energy <= 0.3 * maxEnergy)) {
 			currentDistanceToAnyFood = calculateDistance(xCoord, yCoord, x, y);
 			if (calculateDistance(xCoord, yCoord, x, y) <= this->getHeight() / 2) {
 				fishEatingMethod();
@@ -53,7 +53,7 @@ void HFish::fishEatingMethod()
 void HFish::createCaviarMethod()
 {
     energy -= 2500;
-    createCaviar(this->xCoord, this->yCoord, this->colorGen, true);
+    createCaviar(this->xCoord, this->yCoord, this->colorGen, isHunt);
 }
 
 void HFish::moveAnim()

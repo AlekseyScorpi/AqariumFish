@@ -35,7 +35,7 @@ protected:
 	Bitmap^ fishLeft;
 	Bitmap^ fishRight;
 	double newX, newY;
-	double x, y, speed;
+	double x, y, speed = 1.8;
 	double visibleDistance;
 	int level;
 	Image^ sprite;
@@ -47,7 +47,6 @@ protected:
 	double calculateDistance(double x1, double y1, double x2, double y2);
 	bool isHunt = false;
 public:
-	int getMaxEnergy();
 	property double energy {
 		double get() {
 			return this->fishEnergy;
@@ -63,7 +62,7 @@ public:
 					this->size++;
 					this->maxEnergy = 1000 * size;
 					this->fishSize = gcnew Size(80 + 20 * size, 50 + 18 * size);
-					this->speed = 1.8 - 0.15 * size;
+					this->speed -= 0.1;
 					this->visibleDistance = 200 + 20 * size;
 				}
 				else {
@@ -106,7 +105,6 @@ public:
 			this->foodColdown = param;
 		}
 	}
-	int getColor();
 	property int size {
 		int get() {
 			return this->level;
@@ -128,10 +126,9 @@ public:
 	event DeleteFishHandler^ death;
 	event FoodEatingHandler^ foodEating;
 	event ExistsFishHandler^ existsFish;
-	double getVisibleDistance();
 	Fish(double x, double y, int size, int colorGen);
 	void drawSprite(Graphics^ g);
-	void move(float x, float y);
+	void move(double x, double y);
 	void moveAnim();
 	void foodDetectedMethod(Object^ sender, double x, double y);
 	void foodEatingMethod();

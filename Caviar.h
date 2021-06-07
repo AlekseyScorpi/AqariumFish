@@ -13,20 +13,16 @@ using namespace System::Drawing;
 //Caviar.cpp
 
 
-public delegate void CaviarDeleteHandler(Object^ sender);
 public delegate void FishBirthHandler(double x, double y, int color, bool hunt, Object^ sender);
 
 ref class Caviar
 {
 private:
 	String^ path = "source\\Caviar.png";
-	Size^ caviarSize = gcnew Size(20, 20);
 	double x, y;
 	int colorGen;
 	int timeToBirth = 500;
 	Image^ sprite;
-	bool needToDel = false;
-	bool birth = false;
 	bool huntFish;
 public:
 	property double xCoord {
@@ -40,20 +36,9 @@ public:
 	property double yCoord{
 		void set(double param) {
 			this->y = param;
-			if (param >= 500) {
-				deleteCaviar(this);
-			}
 		}
 		double get() {
 			return this->y;
-		}
-	}
-	property bool doBirth {
-		void set(bool param) {
-			this->birth = param;
-		}
-		bool get() {
-			return this->birth;
 		}
 	}
 	property bool isHunt {
@@ -64,7 +49,7 @@ public:
 			return this->huntFish;
 		}
 	}
-	property int birtTimer {
+	property int birthTimer {
 		void set(int param) {
 			if (param <= 0) {
 				fishBirth(xCoord, yCoord, colorGen, isHunt, this);
@@ -78,7 +63,6 @@ public:
 			return this->timeToBirth;
 		}
 	}
-	event CaviarDeleteHandler^ deleteCaviar;
 	event FishBirthHandler^ fishBirth;
 	Caviar(double x, double y, int colorGen, bool huntFish);
 	void drawSprite(Graphics^ g);

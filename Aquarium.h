@@ -10,7 +10,7 @@ using namespace System::Drawing;
 
 //Примечание
 //Вся реализация конструкторов, методов и т.п. будет находится в:
-//Caviar.cpp
+//Aquarium.cpp
 
 public delegate void AquariumVentHandler();
 

@@ -1,11 +1,5 @@
 ﻿  Fish.cpp
-C:\Users\timos\Desktop\ООПИнфа\FishProject\MyForm.h(453,16): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-C:\Users\timos\Desktop\ООПИнфа\FishProject\MyForm.h(452,30): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-C:\Users\timos\Desktop\ООПИнфа\FishProject\MyForm.h(461,16): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-C:\Users\timos\Desktop\ООПИнфа\FishProject\MyForm.h(460,31): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-C:\Users\timos\Desktop\ООПИнфа\FishProject\Fish.cpp(118,53): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-C:\Users\timos\Desktop\ООПИнфа\FishProject\Fish.cpp(118,25): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-  HFish.cpp
-  Создание кода...
+C:\Users\timos\Desktop\ООПИнфа\FishProject\Fish.cpp(57,53): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\timos\Desktop\ООПИнфа\FishProject\Fish.cpp(57,25): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
   Aquarium.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
   FishProject.vcxproj -> C:\Users\timos\Desktop\ООПИнфа\FishProject\Debug\FishProject.exe

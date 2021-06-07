@@ -9,63 +9,9 @@ using namespace System::Data;
 using namespace System::Drawing;
 
 
-//метод из инета для определения границ и создания прозрачности (спасибо всемирной паутине и добрым умным людям)
-//static Drawing2D::GraphicsPath^ BuildTransparencyPath(Image^ im)
-//{
-//	int x;
-//	int y;
-//	Drawing2D::GraphicsPath^ gp = gcnew Drawing2D::GraphicsPath();
-//	Bitmap^ bmp = gcnew Bitmap(im);
-//	Color mask = bmp->GetPixel(0, 0);
-//
-//	for (x = 0; x <= bmp->Width - 1; x++)
-//	{
-//		for (y = 0; y <= bmp->Height - 1; y++)
-//		{
-//			if (!bmp->GetPixel(x, y).Equals(mask))
-//			{
-//				gp->AddRectangle(Rectangle(x, y, 1, 1));
-//			}
-//		}
-//	}
-//	return gp;
-//}
-
-
-//Fish::Fish() //конструктор по умолчанию
-//{
-//	//sprite = gcnew PictureBox();
-//	x = (float) 250;
-//	y = (float) 250;
-//	size = 1;
-//	sprite = gcnew Bitmap(path);
-//	//sprite->Top = y;
-//	//sprite->Left = x;
-//	//sprite->Width = sprite->Width * 0.5 + 0.1 * size * sprite->Width;
-//	//sprite->Height = sprite->Height * 0.5 + 0.1 * size * sprite->Height;
-//	//bm = gcnew Bitmap(path);
-//	//sprite->BackColor = Color::Transparent;
-//	//bm->MakeTransparent(Color::Transparent);
-//	//sprite->Image = bm;
-//	////sprite->Size = sprite->Image->Size;
-//	//sprite->SizeMode = PictureBoxSizeMode::Zoom;
-//	//sprite->Region = gcnew Region(BuildTransparencyPath(bm));
-//}
-
-
 double Fish::calculateDistance(double x1, double y1, double x2, double y2)
 {
 	return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-}
-
-int Fish::getMaxEnergy()
-{
-	return this->maxEnergy;
-}
-
-int Fish::getColor()
-{
-	return this->colorGen;
 }
 
 double Fish::getHeight()
@@ -73,12 +19,7 @@ double Fish::getHeight()
 	return this->fishSize->Height;
 }
 
-double Fish::getVisibleDistance()
-{
-	return this->visibleDistance;
-}
-
-Fish::Fish(double x, double y, int size, int colorGen) //ожидаемый конструктор
+Fish::Fish(double x, double y, int size, int colorGen)
 {
 	this->x = x;
 	this->y = y;
@@ -100,8 +41,6 @@ Fish::Fish(double x, double y, int size, int colorGen) //ожидаемый конструктор
 		this->fishRight = gcnew Bitmap(path5);
 		this->fishLeft = gcnew Bitmap(path6);
 		break;
-	default:
-		break;
 	}
 	sprite = fishRight;
 	fishSize = gcnew Size(80 + 20 * size, 50 + 18 * size);
@@ -118,7 +57,7 @@ void Fish::drawSprite(Graphics^ g)
 	g->DrawImage(sprite, x - (fishSize->Width / 2), (y - fishSize->Height / 2), (float)fishSize->Width, (float)fishSize->Height);
 }
 
-void Fish::move(float x, float y) //задание новых координат и отображение спрайта по пути движения
+void Fish::move(double x, double y) //задание новых координат и отображение спрайта по пути движения
 {
 	newX = x;
 	newY = y;

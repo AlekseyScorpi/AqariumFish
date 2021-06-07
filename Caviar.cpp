@@ -20,6 +20,6 @@ void Caviar::moveAnim()
         yCoord += 1.5;
     }
     else {
-        birtTimer--;
+        birthTimer--;
     }
 }
